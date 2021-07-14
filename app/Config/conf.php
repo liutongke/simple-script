@@ -27,7 +27,7 @@
 return [
     'ws' => [
         'host' => '0.0.0.0',
-        'port' => 9501,
+        'port' => 80,
         'ssl' => false,
         'reuse_port' => true,//端口复用
     ],

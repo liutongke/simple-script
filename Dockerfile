@@ -7,7 +7,7 @@
 #docker  run --name some-nginx2 -d -p 13337:80 256f90fc81f5
 #------
 FROM php:8.0-cli
-EXPOSE 9501
+EXPOSE 80
 RUN pecl install redis-5.3.4 \
     && pecl install swoole \
     && docker-php-ext-enable redis swoole
