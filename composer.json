@@ -1,0 +1,23 @@
+{
+  "name": "swoole/chat",
+  "description": "this is swoole chat demo",
+  "type": "MIT",
+  "authors": [
+    {
+      "name": "PHP科科",
+      "email": "liutongke@live.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "catfan/Medoo": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "chat\\sw\\": "app/"
+    },
+    "files": [
+      "app/Common/function.php"
+    ]
+  }
+}
