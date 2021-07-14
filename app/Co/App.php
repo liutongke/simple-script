@@ -40,7 +40,7 @@ class App
     public function Index1(\Swoole\Http\Request $request, \Swoole\Http\Response $response)
     {
         $tm = date("Y-m-d H:i:s");
-        $data = "this is dockerfile test {$tm}";
+        $data = "this is dockerfile test---------> {$tm}";
         $response->end($data);
 //        $rand = rand(1111, 9999);
 //        $response->end("<h1>------>Index1</h1>{$rand}");
