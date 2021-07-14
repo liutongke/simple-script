@@ -20,4 +20,4 @@ WORKDIR /var/www/html
 CMD ["php","./index.php"]
 #运行dockerfile创建镜像：docker build -t php7.4-cli:v1 .
 #docker run -it --name php7.4-cli-v1 -d -p 13338:9500 0a15a3bb6aef
-#docker run -it --rm --name php001 -p 13338:9501 b93e8f3904b2 dockerfile启动cmd
+#docker run -it --rm --name php001 -p 13338:9501 b93e8f3904b2 dockerfile启动cmd 
