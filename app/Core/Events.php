@@ -64,6 +64,7 @@ class Events
 
     public function onRequest(\Swoole\Http\Request $request, \Swoole\Http\Response $response)
     {
+        var_dump("-------->",$request);
         if ($request->server['path_info'] == '/favicon.ico' || $request->server['request_uri'] == '/favicon.ico' || $request->server['request_uri'] == '/favicon.png') {
             $response->end();
             return;
@@ -80,8 +81,9 @@ class Events
     public function onWorkerStart(\Swoole\Server $server, int $workerId)
     {
         $config = DI()->config->get('conf.redis');
-        if (!empty($config)) {
-            Redis::getInstance($config);
-        }
+        var_dump($config);
+//        if (!empty($config)) {
+//            Redis::getInstance($config);
+//        }
     }
 }
