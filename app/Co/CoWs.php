@@ -27,6 +27,7 @@
 
 namespace chat\sw\Co;
 
+use chat\sw\Core\CoTable;
 use chat\sw\Router\HttpRouter;
 use Swoole\Process;
 use Swoole\Coroutine;
@@ -42,12 +43,14 @@ class CoWs
     private $pool;//进程池
     private $_config;
     private static $worker = ["WorkerStart"];
+    public static $rps = [];
 
     public function __construct()
     {
         $this->_config = DI()->config->get('conf.ws');
+        CoTable::getInstance();
         //多进程管理模块
-        $this->pool = new Process\Pool(2);
+        $this->pool = new Process\Pool(2, SWOOLE_IPC_UNIXSOCK, 0, true);
         //让每个OnWorkerStart回调都自动创建一个协程
         $this->pool->set(['enable_coroutine' => true]);
         foreach (self::$worker as $workerInfo) {
@@ -55,10 +58,10 @@ class CoWs
         }
     }
 
-    public function WorkerStart($pool, $workerId)
+    public function WorkerStart(\Swoole\Process\Pool $pool, $workerId)
     {
         var_dump($pool);
-//        $http = new \Swoole\Http\Server('0.0.0.0', 9501);
+//        $http = new \Swoole\CoHttp\Server('0.0.0.0', 9501);
 //
 //        $http->on('Request', function ($request, $response) {
 //            $response->header('Content-Type', 'text/html; charset=utf-8');
@@ -81,20 +84,21 @@ class CoWs
         $list = HttpRouter::GetHandlers();
         foreach ($list as $url => $objInfo) {//$server->handle('/Index', [new App(), 'Index']);
 //            $server->handle($key, $value);
+            var_dump($url);
             $server->handle($url, function ($request, $response) use ($server, $objInfo, $pool, $workerId) {
-                call_user_func_array($objInfo, [$request, $response, $workerId]);
+                call_user_func_array($objInfo, [$request, $response, $server, $workerId, $pool]);
             });
         }
-        $server->handle('/Index', [new App(), 'Index']);
-        $server->handle('/test', function ($request, $response) {
-            $rand = rand(1111, 9999);
-            $response->end("<h1>Index1</h1>{$rand}");
-        });
-        $server->handle('/stop', function ($request, $response) use ($server) {
-            (new App())->stop($request, $response, $server);
+//        $server->handle('/Index', [new App(), 'Index']);
+//        $server->handle('/test', function ($request, $response) {
+//            $rand = rand(1111, 9999);
+//            $response->end("<h1>Index1</h1>{$rand}");
+//        });
+//        $server->handle('/stop', function ($request, $response) use ($server) {
+//            (new App())->stop($request, $response, $server);
 //            $response->end("<h1>Stop3</h1>");
 //            $server->shutdown();
-        });
+//        });
     }
 
     public function start()

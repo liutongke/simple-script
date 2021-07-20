@@ -1,0 +1,1 @@
+docker run --publish 14443:443 --publish 11111:80 --name gitlab --privileged=true --restart unless-stopped gitlab/gitlab-ce:latest
