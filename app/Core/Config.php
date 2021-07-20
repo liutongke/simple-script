@@ -56,7 +56,8 @@ class Config
 
     private function loadConfig($fileName)
     {
-        $filePath = $this->path . DIRECTORY_SEPARATOR . $fileName . ".php";
+        $filePath = $this->path . $fileName . ".php";
+        var_dump($filePath);
         $this->confMap[$fileName] = include_once($filePath);
     }
 }

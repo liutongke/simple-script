@@ -49,7 +49,7 @@ define('CONFIG_PATH', ROOT_PATH . 'config' . DS);
 //string(14) "/var/www/html/"
 //string(21) "/var/www/html/config/"
 $di = DI();
-$di->config = new Config("./Config");
+$di->config = new Config(CONFIG_PATH);
 //var_dump($di->config->get('conf.mysql', 123));
 //die;
 //HttpRouter::Register("index/test", function ($b) {
