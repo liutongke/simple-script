@@ -25,29 +25,26 @@
  *——————————————————代码永无BUG —————————————————
  */
 
-namespace chat\sw\Co;
+namespace chat\sw\Controller;
 
 
 class App
 {
     public function Index(\Swoole\Http\Request $request, \Swoole\Http\Response $response)
     {
-        $tm = date("Y-m-d H:i:s");
-        $data = "this is dockerfile test {$tm}";
-        $response->end($data);
+        $response->end("<h1>hello swoole!</h1>");
     }
 
     public function Index1(\Swoole\Http\Request $request, \Swoole\Http\Response $response)
     {
-        $tm = date("Y-m-d H:i:s");
-        $data = "笑脸表情this is dockerfile test---------> {$tm}";
-        $response->end($data);
-//        $rand = rand(1111, 9999);
-//        $response->end("<h1>------>Index1</h1>{$rand}");
+//        EchoHtml($response, "index.html");
+        $rand = rand(1111, 9999);
+        $response->end("<h1>this version 1.0.0------>Index1</h1>{$rand}");
     }
 
     public function stop(\Swoole\Http\Request $request, \Swoole\Http\Response $response)
     {
-        $response->end("<h1>------>stop</h1>");
+        $tm = date('Y-m-d H:i:s');
+        $response->end("<h1>------>stop{$tm}</h1>");
     }
 }

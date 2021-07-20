@@ -1,8 +1,8 @@
 <?php
 /*
  * User: keke
- * Date: 2018/7/26
- * Time: 20:17
+ * Date: 2021/7/15
+ * Time: 22:51
  *——————————————————佛祖保佑 ——————————————————
  *                   _ooOoo_
  *                  o8888888o
@@ -25,32 +25,33 @@
  *——————————————————代码永无BUG —————————————————
  */
 
-namespace chat\sw\Core;
+namespace chat\sw\Co;
 
-class Jwt
+
+class Ws
 {
-    private $token;
-
-    public function __construct($token)
+    public function start()
     {
-        return $this->token = $token;
+
+        $server = new \Swoole\WebSocket\Server("0.0.0.0", 9501);
+        $server->set([
+            'enable_reuse_port' => true,//打开端口重用
+        ]);
+        $server->on('open', function (\Swoole\WebSocket\Server $server, $request) {
+            var_dump($request);
+            echo "server: handshake success with fd{$request->fd}\n";
+        });
+
+        $server->on('message', function (\Swoole\WebSocket\Server $server, $frame) {
+            echo "receive from {$frame->fd}:{$frame->data},opcode:{$frame->opcode},fin:{$frame->finish}\n";
+            $server->push($frame->fd, "this is server");
+        });
+
+        $server->on('close', function ($ser, $fd) {
+            echo "client {$fd} closed\n";
+        });
+
+        $server->start();
     }
 
-    //将token切割成数组
-    public function exToken()
-    {
-        return self::base();
-    }
-
-    //base64解码
-    public function base()
-    {
-        return;
-    }
-
-    //解密第二部分
-    public function decode()
-    {
-        return json_decode(base64_decode(explode('.', $this->token)['1']), true);
-    }
 }
