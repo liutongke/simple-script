@@ -1,0 +1,82 @@
+[2021-07-21 14:58:38 *61.0]	ERROR	php_swoole_server_rshutdown (ERRNO 503): Fatal error: Uncaught Error: Call to undefined method Simps\DB\PDO::select() in /var/www/html/app/Controller/App.php:56
+Stack trace:
+#0 [internal function]: chat\sw\Controller\App->insert()
+#1 /var/www/html/app/Core/Events.php(79): call_user_func_array()
+#2 {main}
+  thrown in /var/www/html/app/Controller/App.php on line 56
+[2021-07-21 14:58:38 $59.0]	WARNING	check_worker_exit_status: worker#0[pid=61] abnormal exit, status=255, signal=0
+[2021-07-21 14:58:56 *62.0]	ERROR	php_swoole_server_rshutdown (ERRNO 503): Fatal error: Uncaught Error: Call to undefined method Simps\DB\PDO::select() in /var/www/html/app/Controller/App.php:56
+Stack trace:
+#0 [internal function]: chat\sw\Controller\App->insert()
+#1 /var/www/html/app/Core/Events.php(79): call_user_func_array()
+#2 {main}
+  thrown in /var/www/html/app/Controller/App.php on line 56
+[2021-07-21 14:58:56 $59.0]	WARNING	check_worker_exit_status: worker#0[pid=62] abnormal exit, status=255, signal=0
+[2021-07-21 14:59:21 *67.0]	ERROR	php_swoole_server_rshutdown (ERRNO 503): Fatal error: Uncaught Error: Call to undefined method Simps\DB\PDO::select() in /var/www/html/app/Controller/App.php:56
+Stack trace:
+#0 [internal function]: chat\sw\Controller\App->insert()
+#1 /var/www/html/app/Core/Events.php(79): call_user_func_array()
+#2 {main}
+  thrown in /var/www/html/app/Controller/App.php on line 56
+[2021-07-21 14:59:21 $65.0]	WARNING	check_worker_exit_status: worker#0[pid=67] abnormal exit, status=255, signal=0
+[2021-07-21 14:59:25 *68.0]	ERROR	php_swoole_server_rshutdown (ERRNO 503): Fatal error: Uncaught Error: Call to undefined method Simps\DB\PDO::select() in /var/www/html/app/Controller/App.php:56
+Stack trace:
+#0 [internal function]: chat\sw\Controller\App->insert()
+#1 /var/www/html/app/Core/Events.php(79): call_user_func_array()
+#2 {main}
+  thrown in /var/www/html/app/Controller/App.php on line 56
+[2021-07-21 14:59:25 $65.0]	WARNING	check_worker_exit_status: worker#0[pid=68] abnormal exit, status=255, signal=0
+[2021-07-21 14:59:30 *69.0]	ERROR	php_swoole_server_rshutdown (ERRNO 503): Fatal error: Uncaught Error: Call to undefined method Simps\DB\PDO::select() in /var/www/html/app/Controller/App.php:56
+Stack trace:
+#0 [internal function]: chat\sw\Controller\App->insert()
+#1 /var/www/html/app/Core/Events.php(79): call_user_func_array()
+#2 {main}
+  thrown in /var/www/html/app/Controller/App.php on line 56
+[2021-07-21 14:59:30 $65.0]	WARNING	check_worker_exit_status: worker#0[pid=69] abnormal exit, status=255, signal=0
+[2021-07-21 15:00:02 *74.0]	ERROR	php_swoole_server_rshutdown (ERRNO 503): Fatal error: Uncaught Error: Call to undefined method Simps\DB\PDO::select() in /var/www/html/app/Controller/App.php:56
+Stack trace:
+#0 [internal function]: chat\sw\Controller\App->insert()
+#1 /var/www/html/app/Core/Events.php(79): call_user_func_array()
+#2 {main}
+  thrown in /var/www/html/app/Controller/App.php on line 56
+[2021-07-21 15:00:02 $72.0]	WARNING	check_worker_exit_status: worker#0[pid=74] abnormal exit, status=255, signal=0
+[2021-07-21 15:01:47 *79.0]	ERROR	php_swoole_server_rshutdown (ERRNO 503): Fatal error: Uncaught Error: Call to undefined method Simps\DB\PDO::select() in /var/www/html/app/Controller/App.php:56
+Stack trace:
+#0 [internal function]: chat\sw\Controller\App->insert()
+#1 /var/www/html/app/Core/Events.php(79): call_user_func_array()
+#2 {main}
+  thrown in /var/www/html/app/Controller/App.php on line 56
+[2021-07-21 15:01:47 $77.0]	WARNING	check_worker_exit_status: worker#0[pid=79] abnormal exit, status=255, signal=0
+[2021-07-21 15:06:15 *84.0]	ERROR	php_swoole_server_rshutdown (ERRNO 503): Fatal error: Uncaught Error: Call to undefined method Simps\DB\PDO::select() in /var/www/html/app/Controller/App.php:56
+Stack trace:
+#0 [internal function]: chat\sw\Controller\App->insert()
+#1 /var/www/html/app/Core/Events.php(79): call_user_func_array()
+#2 {main}
+  thrown in /var/www/html/app/Controller/App.php on line 56
+[2021-07-21 15:06:15 $82.0]	WARNING	check_worker_exit_status: worker#0[pid=84] abnormal exit, status=255, signal=0
+[2021-07-21 15:16:50 *102.0]	ERROR	php_swoole_server_rshutdown (ERRNO 503): Fatal error: Uncaught Error: Class 'App\Model\Model' not found in /var/www/html/app/Controller/App.php:64
+Stack trace:
+#0 [internal function]: chat\sw\Controller\App->dbTest()
+#1 /var/www/html/app/Core/Events.php(79): call_user_func_array()
+#2 {main}
+  thrown in /var/www/html/app/Controller/App.php on line 64
+[2021-07-21 15:16:50 $100.0]	WARNING	check_worker_exit_status: worker#0[pid=102] abnormal exit, status=255, signal=0
+[2021-07-21 15:18:18 *107.0]	ERROR	php_swoole_server_rshutdown (ERRNO 503): Fatal error: Uncaught Error: Call to undefined method chat\sw\Model\User::insert() in /var/www/html/app/Model/User.php:37
+Stack trace:
+#0 /var/www/html/app/Controller/App.php(65): chat\sw\Model\User->index()
+#1 [internal function]: chat\sw\Controller\App->dbTest()
+#2 /var/www/html/app/Core/Events.php(79): call_user_func_array()
+#3 {main}
+  thrown in /var/www/html/app/Model/User.php on line 37
+[2021-07-21 15:18:18 $105.0]	WARNING	check_worker_exit_status: worker#0[pid=107] abnormal exit, status=255, signal=0
+[2021-07-21 15:19:08 *112.0]	ERROR	php_swoole_server_rshutdown (ERRNO 503): Fatal error: Uncaught PDOException: Duplicate entry '11' for key 'PRIMARY' in @swoole-src/library/core/Database/PDOStatementProxy.php:70
+Stack trace:
+#0 /var/www/html/vendor/simple-swoole/db/src/BaseModel.php(166): Swoole\Database\PDOStatementProxy->__call()
+#1 /var/www/html/vendor/simple-swoole/db/src/BaseModel.php(362): Simps\DB\BaseModel->exec()
+#2 /var/www/html/app/Model/User.php(38): Simps\DB\BaseModel->insert()
+#3 /var/www/html/app/Controller/App.php(65): chat\sw\Model\User->index()
+#4 [internal function]: chat\sw\Controller\App->dbTest()
+#5 /var/www/html/app/Core/Events.php(79): call_user_func_array()
+#6 {main}
+  thrown in @swoole-src/library/core/Database/PDOStatementProxy.php on line 70
+[2021-07-21 15:19:08 $110.0]	WARNING	check_worker_exit_status: worker#0[pid=112] abnormal exit, status=255, signal=0

@@ -1,25 +1,23 @@
-#FROM nginx:latest
-#EXPOSE 80 443
-#-----
-#WORKDIR /usr/share/nginx/html
-#CMD 运行以下命令
-#CMD ["nginx"]
-#docker  run --name some-nginx2 -d -p 13337:80 256f90fc81f5
-#------
-FROM php:8.0-cli
-EXPOSE 80
-RUN pecl install redis-5.3.4 \
-    && pecl install swoole \
-    && pecl install pdo \
-    && pecl install pdo_mysql \
-    && docker-php-ext-enable redis swoole pdo pdo_mysql
-#    && php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" \
-#    && php composer-setup.php \
-#    && php -r "unlink('composer-setup.php');" \
-#    && mv composer.phar /usr/local/bin/composer \
-COPY / /var/www/html
-WORKDIR /var/www/html
-CMD ["php","./index.php"]
-#运行dockerfile创建镜像：docker build -t php7.4-cli:v1 .
-#docker run -it --name php7.4-cli-v1 -d -p 13338:9500 0a15a3bb6aef
-#docker run -it --rm --name php001 -p 13338:9501 b93e8f3904b2 dockerfile启动cmd
+# 使用官方 Golang 镜像作为构建环境
+FROM golang:1.15-buster as builder
+EXPOSE 12223
+WORKDIR /app
+# 安装依赖
+COPY go.* ./
+RUN go mod download
+# 将代码文件写入镜像
+COPY . ./
+# 构建二进制文件
+RUN go build -mod=readonly -v -o server
+# 使用裁剪后的官方 Debian 镜像作为基础镜像
+# https://hub.docker.com/_/debian
+# https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+FROM debian:buster-slim
+RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  ca-certificates && \
+  rm -rf /var/lib/apt/lists/*
+COPY --from=builder /app/* /app
+# 将构建好的二进制文件拷贝进镜像
+COPY --from=builder /app/server /app/server
+# 启动 Web 服务
+CMD ["/app/server"]
