@@ -1,8 +1,8 @@
 <?php
 /*
  * User: keke
- * Date: 2021/7/12
- * Time: 18:12
+ * Date: 2021/7/21
+ * Time: 15:17
  *——————————————————佛祖保佑 ——————————————————
  *                   _ooOoo_
  *                  o8888888o
@@ -25,34 +25,20 @@
  *——————————————————代码永无BUG —————————————————
  */
 
-namespace chat\sw\Controller;
+namespace chat\sw\Model;
 
 
-use App\Model\Model;
-use chat\sw\Model\User;
+use Simps\DB\BaseModel;
 
-class App
+class User
 {
-    public function Index(\Swoole\Http\Request $request, \Swoole\Http\Response $response)
+    public function index()
     {
-        $response->end("<h1>hello swoole!</h1>");
+        return (new BaseModel())->insert("account", [['user' => 'hhhh', 'id' => rand(1, 1000)]]);
     }
 
-    public function Index1(\Swoole\Http\Request $request, \Swoole\Http\Response $response)
+    public function fetch()
     {
-//        EchoHtml($response, "index.html");
-        $rand = rand(1111, 9999);
-        $response->end("<h1>this version 1.0.0------>Index1</h1>{$rand}");
-    }
-
-    public function stop(\Swoole\Http\Request $request, \Swoole\Http\Response $response)
-    {
-        $tm = date('Y-m-d H:i:s');
-        $response->end("<h1>------>stop{$tm}</h1>");
-    }
-
-    public function dbTest(\Swoole\Http\Request $request, \Swoole\Http\Response $response)
-    {
-        $response->end((new User())->index());
+        return (new BaseModel())->select("account", '', "*");
     }
 }

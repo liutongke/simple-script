@@ -28,6 +28,7 @@
 namespace chat\sw\Core;
 
 use chat\sw\Router\HttpRouter;
+use Simps\DB\PDO;
 use Simps\DB\Redis;
 
 class Events
@@ -64,7 +65,7 @@ class Events
 
     public function onRequest(\Swoole\Http\Request $request, \Swoole\Http\Response $response)
     {
-        var_dump("-------->",$request);
+//        var_dump("-------->", $request);
         if ($request->server['path_info'] == '/favicon.ico' || $request->server['request_uri'] == '/favicon.ico' || $request->server['request_uri'] == '/favicon.png') {
             $response->end();
             return;
@@ -80,10 +81,15 @@ class Events
 
     public function onWorkerStart(\Swoole\Server $server, int $workerId)
     {
+        $config = DI()->config->get('conf.database');
+//        var_dump("MySQL config:", $config);
+        if (!empty($config)) {
+            PDO::getInstance($config);
+        }
         $config = DI()->config->get('conf.redis');
-        var_dump($config);
-//        if (!empty($config)) {
-//            Redis::getInstance($config);
-//        }
+//        var_dump("redis config:" . $config);
+        if (!empty($config)) {
+            Redis::getInstance($config);
+        }
     }
 }

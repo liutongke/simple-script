@@ -81,4 +81,16 @@ return [
         'time_out' => 1,
         'size' => 64,
     ],
+    'database' => [
+        'host' => '10.0.0.17',
+        'port' => 3306,
+        'database' => 'test',
+        'username' => 'root',
+        'password' => 'ltk123456_+-,',
+        'charset' => 'utf8mb4',
+        'options' => [
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ],
+        'size' => 10,
+    ]
 ];
