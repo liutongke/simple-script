@@ -10,7 +10,9 @@ FROM php:8.0-cli
 EXPOSE 80
 RUN pecl install redis-5.3.4 \
     && pecl install swoole \
-    && docker-php-ext-enable redis swoole
+    && pecl install pdo \
+    && pecl install pdo_mysql \
+    && docker-php-ext-enable redis swoole pdo pdo_mysql
 #    && php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');" \
 #    && php composer-setup.php \
 #    && php -r "unlink('composer-setup.php');" \
