@@ -3,7 +3,7 @@ package websocket
 import (
 	"encoding/json"
 	"fmt"
-	"go-websocket/app/services/BindCenter"
+	"go-websocket/app/services/bindCenter"
 	"go-websocket/app/services/grpcClient"
 	"net/http"
 	"strings"
@@ -82,7 +82,7 @@ func (r *RpcService) SendUserMsgLocal(toUserId int, data []byte) {
 //给分组发送消息
 func SendMsgToGroup(groupId int, data map[string]interface{}) {
 	groupClientList := GetClientHub().GetGroupClientList(groupId)
-	
+
 	b, _ := json.Marshal(Response{
 		Err:  http.StatusOK,
 		Msg:  "SendGroupMsg msg",

@@ -1,10 +1,10 @@
 package Models
 
 import (
-	"go-websocket/tool/RdLine"
-	"go-websocket/tool/Timer"
 	"encoding/json"
 	"fmt"
+	"go-websocket/utils/RdLine"
+	"go-websocket/utils/Timer"
 )
 
 //好友申请的信息格式
@@ -51,7 +51,7 @@ func SendFriendRequest(friendRequestInfo FriendRequestInfo, toUid int) {
 	b, err := json.Marshal(friendRequestInfo)
 	if err == nil {
 		pipe.Add("hset", keys, Timer.NowUnix(), string(b))
-		pipe.Add("Expire", keys, ttl*7)
+		pipe.Add("Expire", keys, 86400*7)
 		pipe.ExecPipe()
 		pipe.RecvPipe()
 	}

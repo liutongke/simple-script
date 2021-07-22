@@ -1,10 +1,10 @@
 package Mgck
 
 import (
-	"go-websocket/config"
-	"go-websocket/tool/dir"
 	"encoding/json"
 	"github.com/bean-du/dfa"
+	"go-websocket/config"
+	"go-websocket/utils/Dir"
 	"io/ioutil"
 	"os"
 )
@@ -22,7 +22,7 @@ type Msgck struct {
 func init() {
 	var tbWords []Msgck
 
-	filePath := dir.GetAbsolutePath(config.GetConfClient().CommonConf.MgCk) // 打开json文件
+	filePath := Dir.GetAbsolutePath(config.GetConfClient().CommonConf.MgCk) // 打开json文件
 
 	jsonFile, err := os.Open(filePath)
 	if err != nil {

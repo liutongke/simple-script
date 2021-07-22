@@ -26,3 +26,4 @@ tmp/
 www/
 test.php
 .idea/
+vendor/

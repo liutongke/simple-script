@@ -3,9 +3,12 @@ FROM golang:1.15-buster as builder
 WORKDIR /app
 # 安装依赖
 COPY go.* ./
-RUN go mod download
+RUN go env -w GO111MODULE=on
+RUN go env -w GOPROXY=https://goproxy.cn,direct
 # 将代码文件写入镜像
 COPY . ./
+#更新mod所有依赖包
+RUN go mod download
 # 构建二进制文件
 RUN go build -mod=readonly -v -o server
 # 使用裁剪后的官方 Debian 镜像作为基础镜像

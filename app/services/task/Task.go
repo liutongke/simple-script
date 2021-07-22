@@ -2,7 +2,7 @@ package task
 
 import (
 	"fmt"
-	"go-websocket/app/services/BindCenter"
+	"go-websocket/app/services/bindCenter"
 	"runtime/debug"
 	"time"
 )
