@@ -11,8 +11,8 @@ import (
 func StartTask() {
 	//var d = 5 * time.Second
 	PingTimer(cleanConnection, "", 300*time.Second)
-	PingTimer(initServiceCenter, "", bindCenter.F5ServiceTm*time.Second)
-	PingTimer(delServiceCenter, "", bindCenter.F5ServiceTm*3*time.Second)
+	//PingTimer(initServiceCenter, "", bindCenter.F5ServiceTm*time.Second)
+	//PingTimer(delServiceCenter, "", bindCenter.F5ServiceTm*3*time.Second)
 }
 
 // 清理超时连接任务

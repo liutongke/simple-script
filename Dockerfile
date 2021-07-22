@@ -24,5 +24,5 @@ COPY . /home
 COPY --from=builder /home/server /home/server
 # 启动 Web 服务
 WORKDIR /home
-CMD ["server"]
+CMD ["./server"]
 #docker build -t go-db:v1 .
