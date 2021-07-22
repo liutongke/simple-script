@@ -12,8 +12,8 @@ func GetAbsolutePath(path string) string {
 	if err != nil {
 		panic("path GetAbsolutePath error")
 	}
-	return "/home" + path
-	//return tmpDir + path
+	//return "/home" + path
+	return tmpDir + path
 }
 
 //初始化创建配置文件

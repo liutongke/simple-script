@@ -23,5 +23,6 @@ COPY . /home
 # 将构建好的二进制文件拷贝进镜像
 COPY --from=builder /home/server /home/server
 # 启动 Web 服务
-CMD ["/home/server"]
+WORKDIR /home
+CMD ["server"]
 #docker build -t go-db:v1 .
