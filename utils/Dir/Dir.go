@@ -1,14 +1,19 @@
 package Dir
 
-import "os"
+import (
+	"fmt"
+	"os"
+)
 
 //获取当前文件路径
 func GetAbsolutePath(path string) string {
 	tmpDir, err := os.Getwd()
+	fmt.Println("-------->", tmpDir)
 	if err != nil {
 		panic("path GetAbsolutePath error")
 	}
-	return tmpDir + path
+	return "/home" + path
+	//return tmpDir + path
 }
 
 //初始化创建配置文件
