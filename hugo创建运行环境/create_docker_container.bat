@@ -1,0 +1,1 @@
+docker run --name nginx-03 -d -p 80:80 -v C:\Users\keke\dev\docker\nginx:/etc/nginx/conf.d -v C:\Users\keke\dev\docker\hugu\myblog\public:/var/local -d nginx

@@ -1,0 +1,1 @@
+hugo --theme=hugo-theme-mini --baseUrl="https://ltkblog.cn/"
