@@ -1,0 +1,1 @@
+直接运行`nginx-load-balancing.bat`脚本创建nginx负载均衡器，`nginx`目录为配置文件。
