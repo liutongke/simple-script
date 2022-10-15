@@ -13,6 +13,7 @@ RUN apt-get update \
     && php composer-setup.php \
     && php -r "unlink('composer-setup.php');"
 
+FROM nginx:1.21.1
 #COPY / /var/www
 
 #WORKDIR /var/www

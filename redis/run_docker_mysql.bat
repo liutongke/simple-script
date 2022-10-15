@@ -1,0 +1,1 @@
+docker run --name mysql-v1 -p 3306:3306 -v C:\Users\keke\dev\docker\MySQL\data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=此处复杂密码 -d mysql:5.7

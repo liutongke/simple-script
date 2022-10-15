@@ -1,0 +1,1 @@
+创建容器前`redis.conf`需要设置 `requirepass` 字段的密码
