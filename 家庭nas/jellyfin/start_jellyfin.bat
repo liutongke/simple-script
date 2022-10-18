@@ -1,0 +1,1 @@
+docker run -d --name jellyfin -p 8096:8096 -v C:\Users\keke\dev\docker\jellyfin\config:/config -v C:\Users\keke\dev\docker\jellyfin\cache:/cache -v C:\Users\keke\dev\docker\jellyfin\media:/media  jellyfin/jellyfin:latest

@@ -1,0 +1,1 @@
+docker run -dt --name bark -p 10000:8080 -v C:\Users\keke\dev\docker\bark-data:/data finab/bark-server

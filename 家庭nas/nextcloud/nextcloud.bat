@@ -1,0 +1,1 @@
+docker run -it -d --name nextcloud --privileged=true -p 8080:80 -v C:\Users\keke\dev\docker\nextcloud:/var/www/html/data --restart=always nextcloud
