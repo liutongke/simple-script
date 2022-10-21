@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  app:
+    image: nextcloud
+    container_name: nextcloud
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PHP_UPLOAD_LIMIT=5000M
+      - PHP_MEMORY_LIMIT=5000M
+    volumes:
+      - ./nextcloud/data:/var/www/html/data

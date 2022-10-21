@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  db:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password --innodb-buffer-pool-size=512M --lower-case-table-names=1 --transaction-isolation=READ-COMMITTED --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --max-connections=512 --innodb-rollback-on-timeout=OFF --innodb-lock-wait-timeout=120
+    restart: always
+    container_name: mysql-1
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_AUTO_UPGRADE: "1"
+      MYSQL_INITDB_SKIP_TZINFO: "1"
+      MYSQL_DATABASE: "photoprism"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    ports:
+      - "3306:3306" # HTTP port (host:container)

@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+  redis:
+    image: redis:6.2.6
+    restart: always
+    container_name: redis-999
+    volumes:
+      - ./redis/data:/data
+      - ./redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - "6379:6379" # HTTP port (host:container)
+    command: redis-server /usr/local/etc/redis/redis.conf
