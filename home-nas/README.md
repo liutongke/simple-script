@@ -111,6 +111,9 @@ services:
 ```shell
 docker run -it -d --name nextcloud --privileged=true -p 8080:80 -v C:\Users\keke\dev\docker\nextcloud:/var/www/html/data --restart=always nextcloud
 ```
+
+使用`docker-compose.yml`创建容器，如果映射了config文件夹，容器第一次创建成功以后需要重启一下容器生成配置文件。
+
 选项含义：
 
 <table>
@@ -157,7 +160,7 @@ docker run -it -d --name nextcloud --privileged=true -p 8080:80 -v C:\Users\keke
 解决方法：
 config.php 添加
 ```php
-'check_data_directory_permissions' => false
+'check_data_directory_permissions' => false,
 ```
 
 绑定onedrive https://apps.nextcloud.com/apps/files_external_onedrive
@@ -165,9 +168,69 @@ config.php 添加
 ## 手动扫描文件夹新增内容：
 
 在`/var/www/html`目录中操作，[参考网址](https://www.coder17.com/posts/nextcloud-auto-scan/)
+config.php 添加
+```php
+'filesystem_check_changes' => true,
+```
+扫描文件夹 su /bin/bash -c "php /var/www/html/occ files:scan --all"
 ```shell
 su /bin/bash -c "php /var/www/html/occ files:scan --all"
 ```
 ![Img](https://raw.githubusercontent.com/lixiaoben123/picgo/master/images/yank-note-picgo-img-20221019022441.png)
 
 **流程图插件名称:Draw.io**
+
+### 设置cron定时任务
+
+[后台任务文档](https://docs.nextcloud.com/server/25/admin_manual/configuration_server/background_jobs_configuration.html)
+
+官方镜像是Debian系统没有cron需要编译时候安装
+Dockerfile安装cron
+```shell
+FROM nextcloud
+
+RUN apt-get update \
+    && apt-get install -y cron \
+    && apt-get install -y vim \
+    && service cron start  
+```
+
+docker-compose.yml使用Dockerfile构建镜像创建容器
+
+```shell
+version: '3.1'
+
+services:
+  app:
+    build: . #将image改为build使用Dockerfile构建
+    container_name: nextcloud
+    restart: always
+    ports:
+      - 12345:80
+    environment:
+      - PHP_UPLOAD_LIMIT=5000M
+      - PHP_MEMORY_LIMIT=5000M
+      - REDIS_HOST=192.168.0.107
+      - REDIS_HOST_PORT=6379
+      - REDIS_HOST_PASSWORD=VCrHOJtfbhwa:Gz
+    volumes:
+      - ./nextcloud/data:/var/www/html/data
+      - ./nextcloud/config:/var/www/html/config
+```
+构建完成以后进入容器创建定时任务
+```shell
+crontab -u www-data -e
+```
+容器定时器创建成功：
+![Img](https://raw.githubusercontent.com/lixiaoben123/picgo/master/images/yank-note-picgo-img-20221023083955.png)
+
+查看cron是否运行
+```shell
+service cron status
+```
+
+启动cron
+```shell
+service cron
+```
+https://segmentfault.com/a/1190000020850932
