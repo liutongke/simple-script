@@ -12,7 +12,7 @@ services:
       - PHP_MEMORY_LIMIT=5000M
       - REDIS_HOST=192.168.0.107
       - REDIS_HOST_PORT=6379
-      - REDIS_HOST_PASSWORD=VCrHOJtfbhwa:Gz
+      - REDIS_HOST_PASSWORD=PASSWORD
     volumes:
       - ./nextcloud/data:/var/www/html/data
       - ./nextcloud/config:/var/www/html/config

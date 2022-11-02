@@ -172,11 +172,18 @@ config.php 添加
 ```php
 'filesystem_check_changes' => true,
 ```
-扫描文件夹 su /bin/bash -c "php /var/www/html/occ files:scan --all"
+**扫描文件夹:**
+非docker
 ```shell
-su /bin/bash -c "php /var/www/html/occ files:scan --all"
+php /var/www/html/occ files:scan --all
 ```
-![Img](https://raw.githubusercontent.com/lixiaoben123/picgo/master/images/yank-note-picgo-img-20221019022441.png)
+
+docker内,其中 -g 后的参数依次为分组名和用户名。可以通过` cat /etc/passwd`查看对应的用户组
+```shell
+su -s /bin/bash -c "php /var/www/html/occ files:scan --all" -g www-data www-data
+```
+
+![](https://raw.githubusercontent.com/lixiaoben123/picgo/master/images/yank-note-picgo-img-20221024223839.png)
 
 **流程图插件名称:Draw.io**
 
@@ -191,8 +198,7 @@ FROM nextcloud
 
 RUN apt-get update \
     && apt-get install -y cron \
-    && apt-get install -y vim \
-    && service cron start  
+    && apt-get install -y vim 
 ```
 
 docker-compose.yml使用Dockerfile构建镜像创建容器
@@ -212,7 +218,7 @@ services:
       - PHP_MEMORY_LIMIT=5000M
       - REDIS_HOST=192.168.0.107
       - REDIS_HOST_PORT=6379
-      - REDIS_HOST_PASSWORD=VCrHOJtfbhwa:Gz
+      - REDIS_HOST_PASSWORD=this is password
     volumes:
       - ./nextcloud/data:/var/www/html/data
       - ./nextcloud/config:/var/www/html/config
@@ -220,7 +226,15 @@ services:
 构建完成以后进入容器创建定时任务
 ```shell
 crontab -u www-data -e
+
+*/5 * * * * /usr/local/bin/php -f /var/www/html/cron.php
 ```
+设置完成以后需要重启一下cron
+重启cron
+```shell
+service cron restart
+```
+
 容器定时器创建成功：
 ![Img](https://raw.githubusercontent.com/lixiaoben123/picgo/master/images/yank-note-picgo-img-20221023083955.png)
 
@@ -229,8 +243,31 @@ crontab -u www-data -e
 service cron status
 ```
 
+
 启动cron
 ```shell
-service cron
+service cron start
 ```
-https://segmentfault.com/a/1190000020850932
+
+打印定时任务测试记录
+```shell
+*/1 * * * * echo "heloo" >> /tmp/cron.log 2>&1
+```
+**参考地址：**
+- https://segmentfault.com/a/1190000020850932
+- https://www.cnblogs.com/007sx/p/11263486.html
+
+此报错需要安装编辑器
+```shell
+update-alternatives: error: no alternatives for editor
+/usr/bin/sensible-editor: 25: editor: not found
+/usr/bin/sensible-editor: 28: nano: not found
+/usr/bin/sensible-editor: 31: nano-tiny: not found
+/usr/bin/sensible-editor: 34: vi: not found
+Couldn't find an editor!
+Set the $EDITOR environment variable to your desired editor.
+crontab: "/usr/bin/sensible-editor" exited with status 1
+```
+
+# windows连接远程桌面
+【开始——输入“mstsc”——打开远程桌面连接客户端】
