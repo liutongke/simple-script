@@ -1,5 +1,6 @@
-FROM php:8.1.18-fpm
-#FROM php:7.4-fpm-bullseye
+FROM php:8.1.18-fpm-bullseye
+
+# 设置工作目录
 WORKDIR /var/www/html
 
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
@@ -16,8 +17,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # 阿里镜像安装composer缺少依赖
 #RUN composer config --global repo.packagist composer https://mirrors.aliyun.com/composer/
 RUN composer config -g repos.packagist composer https://mirrors.tencent.com/composer/
-# 设置工作目录
-WORKDIR /var/www/html
 
 # 暴露端口
 EXPOSE 9000

@@ -15,7 +15,8 @@ RUN random_pass=$(pwgen 16 1) \
     # 替换字段
     && sed -i "s/# requirepass foobared/requirepass $random_pass/" /var/tmp/redis-6.2.12/redis.conf \
     && sed -i 's/^bind 127.0.0.1 -::1/# bind 127.0.0.1 -::1/' /var/tmp/redis-6.2.12/redis.conf \
-    && sed -i 's/^protected-mode yes/protected-mode no/' /var/tmp/redis-6.2.12/redis.conf
+    && sed -i 's/^protected-mode yes/protected-mode no/' /var/tmp/redis-6.2.12/redis.conf \
+    && sed -i 's#logfile ""#logfile "/var/log/redis/redis-server.log"#' /var/tmp/redis-6.2.12/redis.conf
 # 将修改后的配置文件复制到目标位置
 RUN mkdir -p /usr/local/etc/redis
 RUN cp /var/tmp/redis-6.2.12/redis.conf /usr/local/etc/redis/redis.conf
