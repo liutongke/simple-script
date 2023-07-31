@@ -5,11 +5,9 @@ WORKDIR /var/tmp
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
 #设置时区
 ENV TZ=Asia/Shanghai
-RUN apt-get update
-RUN apt-get install wget pwgen -y
-RUN wget http://download.redis.io/releases/redis-6.2.12.tar.gz
+RUN apt-get update && apt-get install -y wget pwgen
+RUN wget http://download.redis.io/releases/redis-6.2.12.tar.gz && tar -zxvf redis-6.2.12.tar.gz
 
-RUN tar -zxvf redis-6.2.12.tar.gz
 # 在构建过程中生成随机字符串
 RUN random_pass=$(pwgen 16 1) \
     # 替换字段
