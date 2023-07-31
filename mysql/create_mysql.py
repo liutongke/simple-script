@@ -20,9 +20,20 @@ password = "".join(random.choice(characters) for _ in range(length))
 current_dir = os.path.join(os.getcwd(), dir_path)
 print("Current directory path:", current_dir)
 
-port = 3306  # 设置端口变量
+while True:
+    port_input = input("Enter MySQL port: ")
+    try:
+        port = int(port_input)
+        break
+    except ValueError:
+        print("Invalid port. Please enter a valid integer port number.")
 
-docker_name = "mysql-1"  # 设置容器名称
+while True:
+    docker_name = input("Enter container name: ")
+    if docker_name.strip():
+        break
+    else:
+        print("Container name cannot be empty. Please enter a valid container name.")
 
 mysql_version = input("Enter MySQL version (5.7 or 8.0): ")
 if mysql_version == "5.7":
@@ -40,7 +51,7 @@ subprocess.run(
         "--name",
         docker_name,
         "-p",
-        f"{port}:3306",  # 使用端口变量
+        f"{port}:3306",  # 使用用户输入的端口号
         "--restart",
         "always",
         "-v",
